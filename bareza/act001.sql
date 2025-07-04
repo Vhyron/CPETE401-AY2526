@@ -1,25 +1,26 @@
 -- problem 1: online bookstore inventory
 
 create table if not exists authors (
-    author_id int(10),
-    first_name varchar(100),
-    last_name varchar(100),
+    author_id int(10) primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
     biography text,
-    dob date
+    date_of_birth date
 );
 
 create table if not exists publishers (
-    publisher_id int(10),
-    publishers_name varchar(100),
-    origin_country varchar(100)
+    publisher_id int(10) primary key,
+    publishers_name varchar(100) not null unique,
+    origin_country varchar(100) not null
 );
 
 create table if not exists books (
-    book_id int(10),
-    title varchar(100),
-    isbn int(13),
-    publication date,
-    price decimal(10,2)
+    book_id int(10) primary key,
+    title varchar(100) not null,
+    isbn int(13) not null unique,
+    publication date not null,
+    price decimal(10,2) not null check (price > 0),
+    publisher_id INT
 );
 
 create table if not exists book_authors (
