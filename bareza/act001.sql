@@ -20,14 +20,16 @@ create table if not exists books (
     isbn int(13) not null unique,
     publication date not null,
     price decimal(10,2) not null check (price > 0),
-    publisher_id INT
+    publisher_id int,
+    foreign key (publisher_id) references publishers(publisher_id) on delete set null
 );
 
 create table if not exists book_authors (
-    -- a table to resolve the many-to-many relationship between books and authors.
-    -- it should contain foreign keys referencing the books and authors tables.
-    -- the combination of a book and an author must be unique.
-    -- if a book or an author is deleted, the corresponding record in this table should also be deleted.
+    book_id int,
+    author_id int,
+    primary key (book_id, author_id),
+    foreign key (book_id) references books(book_id) on delete cascade,
+    foreign key (author_id) references authors(author_id) on delete cascade
 );
 
 -- problem 2: clinic appointment system
