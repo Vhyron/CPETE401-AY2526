@@ -35,19 +35,20 @@ create table if not exists book_authors (
 -- problem 2: clinic appointment system
 
 create table if not exists patients (
-    patient_id int(10),
-    first_name varchar(100),
-    last_name varchar(100),
-    contact int(20),
+    patient_id int(10) primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    date_of_birth date not null,
+    phone_no varchar(20) unique,
     patient_record date
 );
 
 create table if not exists doctors (
-    doctor_id int(10),
-    first_name varchar(100),
-    last_name varchar(100),
-    specialty varchar(100),
-    license int(4) 
+    doctor_id int(10) primary key,
+    first_name varchar(100) not null,
+    last_name varchar(100) not null,
+    medical_specialty varchar(100) not null,
+    license_year year 
 );
 
 create table if not exists appointments (
