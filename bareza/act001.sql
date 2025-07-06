@@ -52,12 +52,14 @@ create table if not exists doctors (
 );
 
 create table if not exists appointments (
-    appointment_id int(10),
-    -- foreign keys to link to one patient and one doctor
+    appointment_id int(10) primary key,
+    patient_id int,
+    doctor_id int,
     date_time datetime,
     reason text,
-    -- the status of the appointment, which can only be one of the following: 'Scheduled', 'Completed', 'Canceled', 'No-Show'. The default should be 'Scheduled'.
-    -- if a patient or doctor is deleted from the system, their appointments should also be deleted.
+    status enum('Scheduled', 'Completed', 'Canceled', 'No-Show') default 'Scheduled',
+    foreign key (patient_id) references patients(patient_id) on delete cascade,
+    foreign key (doctor_id) references doctors(doctor_id) on delete cascade
 );
 
 -- problem 3: university course catalog
