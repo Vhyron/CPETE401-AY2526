@@ -20,17 +20,7 @@ create table if not exists books (
     isbn int(13),
     publication date,
     price decimal(10,2)
-    -- publisher_id int,
-    -- foreign key (publisher_id) references publishers(publisher_id) on delete set null
 );
-
--- create table if not exists book_authors (
---     book_id int,
---     author_id int,
---     primary key (book_id, author_id),
---     foreign key (book_id) references books(book_id) on delete cascade,
---     foreign key (author_id) references authors(author_id) on delete cascade
--- );
 
 -- problem 2: clinic appointment system
 
@@ -53,14 +43,22 @@ create table if not exists doctors (
 
 create table if not exists appointments (
     appointment_id int(10),
-    -- patient_id int,
-    -- doctor_id int,
     date_time datetime,
     reason text,
     status enum('Scheduled', 'Completed', 'Canceled', 'No-Show')
-    -- foreign key (patient_id) references patients(patient_id) on delete cascade,
-    -- foreign key (doctor_id) references doctors(doctor_id) on delete cascade
 );
 
 -- problem 3: university course catalog
 
+create table if not exists departments (
+    department_id int(10),
+    department_name varchar(100),
+    department_location varchar(100)
+);
+
+create table if not exists courses (
+    course_id int(10),
+    course_code varchar(10),
+    course_title varchar(100),
+    credits int(10)
+);
